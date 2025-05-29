@@ -1,0 +1,30 @@
+[
+  {
+    "value": "lens_flare",
+    "label": "レンズフレア"
+  },
+  {
+    "value": "smoke",
+    "label": "スモーク"
+  },
+  {
+    "value": "mist",
+    "label": "霧"
+  },
+  {
+    "value": "petals",
+    "label": "花びら"
+  },
+  {
+    "value": "droplets",
+    "label": "水滴"
+  },
+  {
+    "value": "body_fluid",
+    "label": "体液"
+  },
+  {
+    "value": "particle",
+    "label": "粒子"
+  }
+]

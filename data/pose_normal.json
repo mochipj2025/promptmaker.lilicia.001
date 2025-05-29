@@ -1,0 +1,54 @@
+[
+  {
+    "value": "standing",
+    "label": "立ちポーズ"
+  },
+  {
+    "value": "sitting",
+    "label": "座りポーズ"
+  },
+  {
+    "value": "leaning",
+    "label": "寄りかかり"
+  },
+  {
+    "value": "crossed_arms",
+    "label": "腕組み"
+  },
+  {
+    "value": "walking",
+    "label": "歩行"
+  },
+  {
+    "value": "running",
+    "label": "走る"
+  },
+  {
+    "value": "arms_behind_head",
+    "label": "腕を頭の後ろ"
+  },
+  {
+    "value": "hand_on_hip",
+    "label": "腰に手"
+  },
+  {
+    "value": "saluting",
+    "label": "敬礼"
+  },
+  {
+    "value": "waving_hand",
+    "label": "手を振る"
+  },
+  {
+    "value": "hands_clasped",
+    "label": "両手を組む"
+  },
+  {
+    "value": "holding_object",
+    "label": "物を持つ"
+  },
+  {
+    "value": "looking_back",
+    "label": "振り返る"
+  }
+]

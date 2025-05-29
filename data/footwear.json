@@ -1,0 +1,22 @@
+[
+  {
+    "value": "long_boots",
+    "label": "ロングブーツ"
+  },
+  {
+    "value": "knee_socks",
+    "label": "ニーソックス"
+  },
+  {
+    "value": "fishnet_tights",
+    "label": "網タイツ"
+  },
+  {
+    "value": "strap_heels",
+    "label": "ストラップヒール"
+  },
+  {
+    "value": "ankle_boots",
+    "label": "アンクルブーツ"
+  }
+]

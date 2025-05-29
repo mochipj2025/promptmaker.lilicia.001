@@ -1,0 +1,30 @@
+[
+  {
+    "value": "backlight",
+    "label": "逆光"
+  },
+  {
+    "value": "spotlight",
+    "label": "スポットライト"
+  },
+  {
+    "value": "moonlight",
+    "label": "月光"
+  },
+  {
+    "value": "neon",
+    "label": "ネオンライト"
+  },
+  {
+    "value": "firelight",
+    "label": "炎"
+  },
+  {
+    "value": "highlight",
+    "label": "ハイライト"
+  },
+  {
+    "value": "rimlight",
+    "label": "リムライト"
+  }
+]

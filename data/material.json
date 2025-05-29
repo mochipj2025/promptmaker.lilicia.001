@@ -1,0 +1,30 @@
+[
+  {
+    "value": "black_leather",
+    "label": "黒レザー"
+  },
+  {
+    "value": "red_leather",
+    "label": "赤レザー"
+  },
+  {
+    "value": "distressed_leather",
+    "label": "ヴィンテージレザー"
+  },
+  {
+    "value": "white_lace",
+    "label": "白レース"
+  },
+  {
+    "value": "red_silk",
+    "label": "赤シルク"
+  },
+  {
+    "value": "denim",
+    "label": "デニム"
+  },
+  {
+    "value": "spangle",
+    "label": "スパンコール"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "value": "dark_world",
+    "label": "ダークな世界"
+  },
+  {
+    "value": "ruins",
+    "label": "廃墟"
+  },
+  {
+    "value": "cathedral",
+    "label": "神殿"
+  },
+  {
+    "value": "factory",
+    "label": "工場"
+  },
+  {
+    "value": "flowers",
+    "label": "花"
+  },
+  {
+    "value": "monochrome",
+    "label": "モノクロ"
+  },
+  {
+    "value": "bokeh",
+    "label": "ぼかし"
+  }
+]

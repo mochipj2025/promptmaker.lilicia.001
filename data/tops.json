@@ -1,0 +1,46 @@
+[
+  {
+    "value": "white_button_shirt",
+    "label": "白ボタンシャツ"
+  },
+  {
+    "value": "black_lace_bralette",
+    "label": "黒レースブラレット"
+  },
+  {
+    "value": "red_cropped_hoodie",
+    "label": "赤クロップドパーカー"
+  },
+  {
+    "value": "see_through_mesh_top",
+    "label": "シースルーメッシュトップ"
+  },
+  {
+    "value": "military_tanktop",
+    "label": "ミリタリータンクトップ"
+  },
+  {
+    "value": "china_dress_top",
+    "label": "チャイナドレストップ"
+  },
+  {
+    "value": "knit_sweater",
+    "label": "ニットセーター"
+  },
+  {
+    "value": "sports_bra",
+    "label": "スポーツブラ"
+  },
+  {
+    "value": "bustier",
+    "label": "ビスチェ"
+  },
+  {
+    "value": "camisole",
+    "label": "キャミソール"
+  },
+  {
+    "value": "harness_top",
+    "label": "ハーネストップ"
+  }
+]

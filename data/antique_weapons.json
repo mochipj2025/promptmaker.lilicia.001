@@ -1,0 +1,58 @@
+[
+  {
+    "value": "antique_greatsword",
+    "label": "アンティーク大剣"
+  },
+  {
+    "value": "rusty_bastard_sword",
+    "label": "錆びたバスタードソード"
+  },
+  {
+    "value": "ornate_warhammer",
+    "label": "装飾付きウォーハンマー"
+  },
+  {
+    "value": "ancient_naginata",
+    "label": "古びたナギナタ"
+  },
+  {
+    "value": "old_flintlock_pistol",
+    "label": "古式火縄銃"
+  },
+  {
+    "value": "vintage_crossbow",
+    "label": "ヴィンテージクロスボウ"
+  },
+  {
+    "value": "damascus_dagger",
+    "label": "ダマスカス短剣"
+  },
+  {
+    "value": "engraved_halberd",
+    "label": "彫金入りハルバード"
+  },
+  {
+    "value": "antique_morningstar",
+    "label": "アンティークモーニングスター"
+  },
+  {
+    "value": "rusted_chain_whip",
+    "label": "錆びた鎖鞭"
+  },
+  {
+    "value": "ornamental_rapier",
+    "label": "装飾付きレイピア"
+  },
+  {
+    "value": "battle_axe",
+    "label": "戦斧"
+  },
+  {
+    "value": "spiked_mace",
+    "label": "スパイクメイス"
+  },
+  {
+    "value": "sacrificial_dagger",
+    "label": "儀式用短剣"
+  }
+]

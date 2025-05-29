@@ -1,0 +1,30 @@
+[
+  {
+    "value": "gothic_dress",
+    "label": "ゴシックドレス"
+  },
+  {
+    "value": "cheongsam",
+    "label": "チャイナドレス"
+  },
+  {
+    "value": "long_onepiece",
+    "label": "ロングワンピース"
+  },
+  {
+    "value": "sailor_fuku",
+    "label": "セーラー服"
+  },
+  {
+    "value": "battle_suit",
+    "label": "バトルスーツ"
+  },
+  {
+    "value": "maid_outfit",
+    "label": "メイド服"
+  },
+  {
+    "value": "bodysuit",
+    "label": "ボディースーツ"
+  }
+]

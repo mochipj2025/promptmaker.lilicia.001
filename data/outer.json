@@ -1,0 +1,22 @@
+[
+  {
+    "value": "trench_coat",
+    "label": "トレンチコート"
+  },
+  {
+    "value": "boa_jacket",
+    "label": "ボアジャケット"
+  },
+  {
+    "value": "cape",
+    "label": "ケープ"
+  },
+  {
+    "value": "rider_jacket",
+    "label": "ライダースジャケット"
+  },
+  {
+    "value": "poncho",
+    "label": "ポンチョ"
+  }
+]

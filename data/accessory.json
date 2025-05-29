@@ -1,0 +1,26 @@
+[
+  {
+    "value": "harness",
+    "label": "ハーネス"
+  },
+  {
+    "value": "spike_choker",
+    "label": "スパイクチョーカー"
+  },
+  {
+    "value": "chain_belt",
+    "label": "チェーンベルト"
+  },
+  {
+    "value": "leather_wristband",
+    "label": "レザーリストバンド"
+  },
+  {
+    "value": "ribbon",
+    "label": "リボン"
+  },
+  {
+    "value": "lace_up",
+    "label": "レースアップ"
+  }
+]

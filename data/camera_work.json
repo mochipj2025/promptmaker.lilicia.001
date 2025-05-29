@@ -1,0 +1,42 @@
+[
+  {
+    "value": "35mm",
+    "label": "35mm"
+  },
+  {
+    "value": "50mm",
+    "label": "50mm"
+  },
+  {
+    "value": "closeup",
+    "label": "クローズアップ"
+  },
+  {
+    "value": "overhead",
+    "label": "俯瞰"
+  },
+  {
+    "value": "low_angle",
+    "label": "煽り"
+  },
+  {
+    "value": "pov",
+    "label": "主観視点"
+  },
+  {
+    "value": "extreme_closeup",
+    "label": "ドアップ"
+  },
+  {
+    "value": "bust_focus",
+    "label": "胸の谷間フォーカス"
+  },
+  {
+    "value": "crotch_zoom",
+    "label": "股間ドアップ"
+  },
+  {
+    "value": "body_sweep",
+    "label": "舐め回す視線"
+  }
+]
