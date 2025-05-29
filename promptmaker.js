@@ -9,6 +9,13 @@ const FIXED_PROMPT = [
   "spotlight", "rim_light", "dark_world", "smoke", "mist"
 ].join(', ');
 
+const FIXED_NEGATIVE_PROMPT = [
+  "score_6", "score_5", "score_4", "simplified", "abstract", "unrealistic", "impressionistic",
+  "low resolution", "((adult body))", "lowres", "bad anatomy", "bad hands", "missing fingers",
+  "worst quality", "low quality", "normal quality", "cartoon", "anime", "drawing", "sketch",
+  "illustration", "artificial", "poor quality"
+].join(', ');
+
 const categoryMeta = [
   { name: "tops", label: "トップス" },
   { name: "bottoms", label: "ボトムス" },
@@ -32,13 +39,11 @@ const categoryMeta = [
 const loadedData = {};
 
 window.onload = async function() {
-  // form-areaが無い場合はエラーを出す
   const area = document.getElementById('form-area');
   if (!area) {
     alert("index.htmlに<div id='form-area'></div>がありません！");
     return;
   }
-  // データ取得
   for (const cat of categoryMeta) {
     try {
       const res = await fetch(`data/${cat.name}.json`);
@@ -49,6 +54,7 @@ window.onload = async function() {
   }
   renderForm();
   updatePrompt();
+  document.getElementById('negprompt-output').value = FIXED_NEGATIVE_PROMPT;
 };
 
 function renderForm() {
@@ -64,7 +70,6 @@ function renderForm() {
     const selRow = document.createElement('div');
     selRow.className = "select-row";
     const data = loadedData[cat.name] || [];
-    // チェックボックス or セレクト切替
     if (data.length < 8) {
       data.forEach(opt => {
         const btn = document.createElement('button');
@@ -106,6 +111,11 @@ function updatePrompt() {
 
 document.getElementById('copy-prompt').onclick = function() {
   const ta = document.getElementById('prompt-output');
+  ta.select();
+  document.execCommand('copy');
+};
+document.getElementById('copy-negprompt').onclick = function() {
+  const ta = document.getElementById('negprompt-output');
   ta.select();
   document.execCommand('copy');
 };
