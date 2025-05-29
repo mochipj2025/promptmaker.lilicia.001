@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>リリシア専用プロンプトメーカー - PRO EDITION</title>
+  <link rel="stylesheet" href="promptmaker.css">
+</head>
+<body>
+  <header class="header">
+    <h1>🎨 リリシア専用プロンプトメーカー <span>AI画像生成／LoRAマネージャー内蔵</span></h1>
+    <p class="desc">
+      「data」フォルダ内すべてのカテゴリに対応。<br>
+      固定prompt／negative、自動LoRA管理。<br>
+      プロのAIアーティスト・エンジニア品質です。
+    </p>
+  </header>
+
+  <main class="container">
+    <!-- カテゴリーUI -->
+    <section id="prompt-controls" class="prompt-controls"></section>
+
+    <!-- LoRA管理 -->
+    <section id="lora-manager" class="lora-manager">
+      <h3>LoRAモデル選択</h3>
+      <input type="text" id="lora-search" placeholder="LoRA名検索…" />
+      <div class="lora-tags">
+        <button data-tag="all" class="active">全て</button>
+        <button data-tag="nsfw">NSFW</button>
+        <button data-tag="safe">Safe</button>
+        <button data-tag="detail">Detail</button>
+      </div>
+      <ul id="lora-list"></ul>
+      <div class="lora-preset">
+        <button id="save-preset" title="現在のLoRA選択をプリセット保存">組み合わせ保存</button>
+        <button id="load-preset" title="保存済みの組み合わせ呼び出し">呼び出し</button>
+      </div>
+    </section>
+
+    <!-- Prompt出力 -->
+    <section class="prompt-output-area">
+      <h2>生成プロンプト</h2>
+      <label>Positive Prompt</label>
+      <textarea id="prompt-output" readonly rows="5"></textarea>
+      <label style="margin-top:1em;">Negative Prompt</label>
+      <textarea id="neg-output" readonly rows="3"></textarea>
+      <div class="prompt-actions">
+        <button id="copy-btn">コピペ</button>
+        <button id="reset-btn">リセット</button>
+        <label style="margin-left:1em;">
+          <input type="checkbox" id="lang-toggle"> 英語出力
+        </label>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <small>© 2025 リリシア専用プロンプトメーカー / Professional Edition</small>
+  </footer>
+  <script src="promptmaker.js"></script>
+</body>
+</html>
