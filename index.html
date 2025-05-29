@@ -2,18 +2,24 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>リリシア専用プロンプトメーカー</title>
+  <title>リリシア・プロンプトメーカー</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>リリシア専用プロンプトメーカー</h1>
+  <h1 class="hero-title">リリシア・プロンプトメーカー</h1>
   <div id="form-area"></div>
   <div class="output-area">
     <h2>Positive Prompt</h2>
-    <textarea id="prompt-output" rows="4" readonly></textarea>
-    <button id="copy-prompt">コピー</button>
+    <textarea id="prompt-output" rows="5" readonly></textarea>
+    <button id="copy-prompt" class="copy-btn">コピー</button>
+    <h2>Negative Prompt</h2>
+    <textarea id="negprompt-output" rows="3" readonly></textarea>
+    <button id="copy-negprompt" class="copy-btn">コピー</button>
   </div>
+  <footer>
+    <p class="footer-text">© 2025 リリシア・プロンプトメーカー</p>
+  </footer>
   <script src="promptmaker.js"></script>
 </body>
 </html>
