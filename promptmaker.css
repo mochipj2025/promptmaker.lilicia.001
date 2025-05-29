@@ -1,142 +1,122 @@
 body {
-  background: #f7f3ee;
-  color: #24221f;
-  font-family: 'Segoe UI', 'Noto Sans JP', Arial, sans-serif;
+  font-family: 'Meiryo', 'Segoe UI', Arial, sans-serif;
+  background: #171a22;
+  color: #f2f2f2;
   margin: 0;
   padding: 0;
 }
-.header {
-  background: #ede5da;
-  border-bottom: 2px solid #c7b8a3;
-  padding: 2em 1em 1em 1em;
+.hero-title {
   text-align: center;
-}
-.header h1 {
   font-size: 2.1em;
-  margin: 0 0 0.3em 0;
+  margin-top: 2em;
+  margin-bottom: 1.2em;
+  letter-spacing: 0.07em;
+  font-weight: 900;
+  color: #f7f5ff;
+  text-shadow: 0 2px 8px #7c4dff33;
+}
+#form-area,
+.output-area {
+  max-width: 540px;
+  margin: 0 auto 2.2em auto;
+}
+.category-block {
+  background: #23253c;
+  border-radius: 17px;
+  box-shadow: 0 2px 16px #0004;
+  margin: 1.1em 0 0.7em 0;
+  padding: 0.8em 1.3em 1em 1.3em;
+  width: 100%;
+  min-width: 0;
+  transition: box-shadow 0.22s;
+  overflow: hidden;
+}
+.cat-title {
+  font-weight: bold;
+  font-size: 1.09em;
+  margin-bottom: 0.62em;
+  color: #d9d5fa;
   letter-spacing: 0.05em;
 }
-.header h1 span { font-size: 0.65em; color: #ad997c; }
-.header .desc {
-  color: #876e44;
-  margin: 0.2em auto 0.5em auto;
-  font-size: 1.1em;
-}
-.container {
-  max-width: 1000px;
-  margin: 2em auto;
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #d1c1ac25;
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  gap: 2em;
-}
-.prompt-controls, .lora-manager { margin-bottom: 2em; }
-.category-block {
-  background: #f9f5ee;
-  border-radius: 14px;
-  box-shadow: 0 2px 8px #e9dfd333;
-  padding: 1.2em 1em;
-  margin-bottom: 0.9em;
-}
-.category-block h3 {
-  margin: 0 0 0.4em 0;
-  font-size: 1.1em;
-  color: #947d5d;
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-}
-.category-block .cat-desc {
-  color: #b8a37d;
-  font-size: 0.95em;
-  margin-bottom: 0.5em;
-}
 .select-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6em;
-}
-.select-row select, .select-row input[type="text"], .toggle-btn {
-  font-size: 1em;
-  border-radius: 8px;
-  border: 1px solid #e2d4c1;
-  background: #fff;
-  padding: 0.4em 1em;
-  min-width: 110px;
   margin-bottom: 0.3em;
 }
 .toggle-btn {
-  background: #ebd9bf;
-  color: #745e35;
+  background: #292e51;
+  color: #ebe5ff;
   border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.toggle-btn.selected {
-  background: #b4986e;
-  color: #fff;
-}
-.lora-manager { background: #f7eee2; border-radius: 12px; padding: 1.4em 1em; }
-.lora-manager h3 { margin-top: 0; color: #967f5f; }
-#lora-search { width: 200px; font-size:1em; border-radius: 8px; border:1px solid #c3b093; padding:0.3em 1em; }
-.lora-tags { margin: 0.8em 0 0.6em 0; }
-.lora-tags button { margin-right:0.7em; border: none; background: #ecd6a5; color:#7a5e36; border-radius: 8px; padding: 0.35em 1em; cursor:pointer; }
-.lora-tags .active { background: #c6a06a; color: #fff; }
-#lora-list { list-style:none; padding:0; margin:0; }
-#lora-list li { padding: 0.5em 0.4em; border-bottom: 1px dashed #decebb; display:flex; align-items:center; gap:1em;}
-.lora-name { font-weight: bold; }
-.lora-nsfw { color: #e74c3c; font-weight:bold; margin-right:0.5em; }
-.lora-safe { color: #27ae60; font-weight:bold; margin-right:0.5em; }
-.lora-desc { color: #947d5d; font-size:0.95em; }
-.lora-add-btn { background: #cab193; color: #fff; border: none; border-radius: 6px; padding: 0.3em 1em; margin-left:1em; cursor: pointer; }
-.lora-add-btn.selected { background: #8d6b40; }
-.lora-preset button { margin-right: 0.8em; }
-.prompt-output-area {
-  background: #f3ede7;
-  border-radius: 12px;
-  box-shadow: 0 1px 8px #e5dac425;
-  padding: 1.4em 1em;
-}
-.prompt-output-area h2 {
-  font-size: 1.1em;
-  margin: 0 0 0.6em 0;
-  color: #876e44;
-}
-.prompt-output-area label { display:block; font-weight:bold; color:#947d5d; margin:0.7em 0 0.2em 0;}
-#prompt-output, #neg-output {
-  width: 100%;
-  font-size: 1.05em;
-  padding: 1em;
-  border-radius: 10px;
-  border: 1.5px solid #d5c2a9;
-  min-height: 60px;
-  background: #fff;
-  margin-bottom: 0.5em;
-}
-.prompt-actions {
-  display: flex;
-  gap: 0.6em;
-  align-items: center;
-}
-.prompt-actions button {
+  border-radius: 9px;
+  margin: 0.15em 0.35em 0.15em 0;
+  padding: 0.45em 1.3em;
   font-size: 1em;
-  padding: 0.45em 1.2em;
-  background: #cab193;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.15s, color 0.13s;
+  font-weight: bold;
+  box-shadow: 0 1px 4px #0002;
 }
-.prompt-actions button:hover { background: #b4986e; }
-.footer {
+.toggle-btn.selected,
+.toggle-btn:hover {
+  background: #6c5cff;
+  color: #fff;
+}
+select {
+  padding: 0.43em 1.1em;
+  font-size: 1em;
+  border-radius: 9px;
+  border: 1px solid #6c5cff;
+  background: #191a2a;
+  color: #fff;
+}
+.output-area {
+  background: #23253c;
+  border-radius: 18px;
+  box-shadow: 0 2px 12px #0005;
+  padding: 2em 1.1em;
+}
+textarea {
+  width: 99%;
+  min-height: 2.5em;
+  background: #181b2c;
+  border: 1px solid #6c5cff;
+  color: #fff;
+  border-radius: 9px;
+  padding: 0.75em 1em;
+  font-size: 1.14em;
+  font-family: inherit;
+  margin-bottom: 0.7em;
+  resize: vertical;
+  box-shadow: 0 1px 3px #0002;
+}
+.copy-btn {
+  background: #7c4dff;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-weight: bold;
+  padding: 0.7em 2.3em;
+  font-size: 1.09em;
+  margin-bottom: 1.5em;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.12s;
+  box-shadow: 0 1px 6px #0002;
+  margin-right: 1em;
+  margin-top: 0.2em;
+}
+.copy-btn:hover {
+  background: #a89cff;
+  color: #23253c;
+  box-shadow: 0 4px 18px #a89cff50, 0 1px 7px #0001;
+}
+footer {
   text-align: center;
-  margin: 3em 0 1em 0;
-  color: #b8a37d;
-  font-size: 0.9em;
+  margin-top: 3.7em;
+  margin-bottom: 1.5em;
+  color: #8e91b2;
+  font-size: 0.95em;
+  letter-spacing: 0.05em;
 }
-@media (max-width: 900px) { .container { padding:1em; } }
-@media (max-width: 700px) { .container { padding: 0.4em; } }
+@media (max-width: 700px) {
+  #form-area,
+  .output-area { max-width: 98vw; padding: 0 2vw;}
+  .category-block { margin: 0.7em 0; }
+}
