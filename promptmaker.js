@@ -1,231 +1,143 @@
-// ===== 固定prompt（必須） =====
 const FIXED_PROMPT = [
-  "score_9", "score_8_up", "score_7_up", "photorealistic", "real human texture", "dslr",
-  "soft focus", "film grain", "candid moment", "subtle imperfections",
-  "Lilithia", "silver hair", "medium length", "layered hairstyle", "golden eyes",
+  "score_9", "score_8_up", "score_7_up", "photorealistic", "real human texture",
+  "dslr", "soft focus", "film grain", "candid moment", "subtle imperfections",
+  "Lilithia", "silver hair", "medium length, layered hairstyle", "golden eyes",
   "sexy and cute face", "large breasts", "slim waist", "alluring", "confident",
-  "does not resist desire", "goddess of lust", "succubus queen"
-];
+  "does not resist desire", "goddess of lust", "succubus queen",
+  // 初期装備/演出
+  "white_button_shirt", "denim_mini_skirt", "thong", "long_boots", "vintage_leather",
+  "garter_belt", "holding_object", "rusted_bastard_sword", "bird_eye_view",
+  "spotlight", "rim_light", "dark_world", "smoke", "mist"
+].join(', ');
 
-// ===== 固定negative prompt（必須） =====
-const FIXED_NEG_PROMPT = [
+const FIXED_NEGATIVE_PROMPT = [
   "score_6", "score_5", "score_4", "simplified", "abstract", "unrealistic", "impressionistic",
-  "low resolution", "lowres", "bad anatomy", "bad hands", "missing fingers", "worst quality", "low quality",
-  "normal quality", "cartoon", "anime", "drawing", "sketch", "illustration", "artificial", "poor quality"
+  "low resolution", "((adult body))", "lowres", "bad anatomy", "bad hands", "missing fingers",
+  "worst quality", "low quality", "normal quality", "cartoon", "anime", "drawing", "sketch",
+  "illustration", "artificial", "poor quality"
+].join(', ');
+
+// 必ずカテゴリjsonファイルも { value: "英語プロンプト", label: "日本語ラベル" } 形式に！
+const categoryMeta = [
+  { name: "tops", label: "トップス", selectType: "multiple" },
+  { name: "bottoms", label: "ボトムス", selectType: "multiple" },
+  { name: "onepiece", label: "ワンピース", selectType: "multiple" },
+  { name: "outer", label: "アウター", selectType: "multiple" },
+  { name: "lingerie", label: "ランジェリー", selectType: "multiple" },
+  { name: "footwear", label: "靴・レッグウェア", selectType: "multiple" },
+  { name: "material", label: "素材", selectType: "single" },
+  { name: "accessory", label: "装飾品", selectType: "multiple" },
+  { name: "fetish", label: "フェティッシュ", selectType: "multiple" },
+  { name: "cosplay", label: "コスプレ", selectType: "multiple" },
+  { name: "masturbation_pose", label: "マスターベーション", selectType: "multiple" },
+  { name: "pose_normal", label: "通常ポーズ", selectType: "single" },
+  { name: "antique_weapons", label: "アンティーク武器", selectType: "multiple" },
+  { name: "camera_work", label: "カメラワーク", selectType: "single" },
+  { name: "lighting", label: "ライティング", selectType: "multiple" },
+  { name: "background", label: "背景", selectType: "single" },
+  { name: "effect", label: "演出エフェクト", selectType: "multiple" }
 ];
 
-// ===== LoRA管理用サンプル（本番はlora.json推奨） =====
-let loraList = [
-  {
-    name: "cinematic_style_v1",
-    display: "Cinematic Style",
-    file: "cinematicStyle_v1.safetensors",
-    size: "299MB",
-    date: "2025/05/18",
-    desc: "シネマ風フィルム粒子強調",
-    tag: ["safe", "detail"],
-    nsfw: false,
-    default_weight: 0.6
-  },
-  {
-    name: "Pussy_LLM_v5",
-    display: "Pussy LLM v5",
-    file: "Pussy_LLM_v5XL.safetensors",
-    size: "665MB",
-    date: "2025/05/15",
-    desc: "超リアルなディティール/NSFW特化",
-    tag: ["nsfw", "detail"],
-    nsfw: true,
-    default_weight: 0.7
+const loadedData = {};
+
+window.onload = async function() {
+  for (const cat of categoryMeta) {
+    const res = await fetch(`data/${cat.name}.json`);
+    loadedData[cat.name] = await res.json();
   }
-  // …必要に応じて追加
-];
-
-// ===== dataフォルダの全カテゴリ（2025/05/29最新版） =====
-const JSON_DIR = "./data/";
-const jsonFiles = [
-  "accessory.json",
-  "antique_weapon.json",
-  "background.json",
-  "bottoms.json",
-  "camera_angle.json",
-  "camera_work.json",
-  "fetish.json",
-  "fixed_character.json",
-  "footwear.json",
-  "lighting.json",
-  "lingerie.json",
-  "masturbation_pose.json",
-  "material.json",
-  "onepiece.json",
-  "outer.json",
-  "pose_normal.json",
-  "tops.json"
-];
-const categories = {};
-
-// ===== ページ起動時 =====
-window.addEventListener('DOMContentLoaded', async () => {
-  for (let file of jsonFiles) {
-    try {
-      const res = await fetch(JSON_DIR + file);
-      if (res.ok) categories[file.replace(/\.json$/, "")] = await res.json();
-    } catch {}
-  }
-  buildCategoryUI();
-  buildLoraUI();
+  renderForm();
   updatePrompt();
-  addEventListeners();
-});
+  document.getElementById('negprompt-output').value = FIXED_NEGATIVE_PROMPT;
+};
 
-// ===== カテゴリUI自動生成 =====
-function buildCategoryUI() {
-  const container = document.getElementById('prompt-controls');
-  container.innerHTML = "";
-  for (let [cat, data] of Object.entries(categories)) {
-    const block = document.createElement('div');
-    block.className = "category-block";
-    const h3 = document.createElement('h3');
-    h3.innerHTML = `<span>📁</span>${cat}`;
-    block.appendChild(h3);
-    // カテゴリ説明は空（必要ならあとで追加OK）
-    const selRow = document.createElement('div');
-    selRow.className = "select-row";
-    if (Array.isArray(data) && data.length > 0) {
-      if (data.length < 8) {
-        data.forEach(opt => {
-          const btn = document.createElement('button');
-          btn.type = "button";
-          btn.className = "toggle-btn";
-          btn.textContent = opt;
-          btn.onclick = () => {
-            btn.classList.toggle('selected');
-            updatePrompt();
-          };
-          selRow.appendChild(btn);
-        });
-      } else {
-        const select = document.createElement('select');
-        select.innerHTML = `<option value="">選択してください</option>`;
-        data.forEach(opt => {
-          select.innerHTML += `<option value="${opt}">${opt}</option>`;
-        });
-        select.onchange = updatePrompt;
-        selRow.appendChild(select);
-      }
+function renderForm() {
+  const area = document.getElementById('form-area');
+  area.innerHTML = '';
+  categoryMeta.forEach(cat => {
+    const card = document.createElement('div');
+    card.className = "category-card";
+
+    // カテゴリ名
+    const header = document.createElement('button');
+    header.className = "cat-accordion";
+    header.type = "button";
+    header.textContent = cat.label;
+    header.setAttribute("aria-expanded", "false");
+
+    // パネル
+    const panel = document.createElement('div');
+    panel.className = "cat-panel";
+    panel.style.display = "none";
+
+    header.onclick = function () {
+      const isOpen = panel.style.display === "block";
+      panel.style.display = isOpen ? "none" : "block";
+      header.classList.toggle('active', !isOpen);
+    };
+
+    // 選択肢（select or checkbox）
+    if (cat.selectType === "single") {
+      const select = document.createElement('select');
+      select.name = cat.name;
+      select.onchange = updatePrompt;
+      select.appendChild(new Option("選択してください", ""));
+      loadedData[cat.name].forEach(opt => {
+        const option = document.createElement('option');
+        option.value = opt.value;              // 英語プロンプト
+        option.textContent = opt.label;        // 日本語ラベル
+        select.appendChild(option);
+      });
+      panel.appendChild(select);
+    } else {
+      loadedData[cat.name].forEach(opt => {
+        const id = `${cat.name}_${opt.value}`;
+        const input = document.createElement('input');
+        input.type = "checkbox";
+        input.id = id;
+        input.name = cat.name;
+        input.value = opt.value;              // 英語プロンプト
+        input.addEventListener('change', updatePrompt);
+
+        const lab = document.createElement('label');
+        lab.htmlFor = id;
+        lab.textContent = opt.label;          // 日本語ラベル
+        lab.className = "checkbox-label";
+
+        panel.appendChild(input);
+        panel.appendChild(lab);
+      });
     }
-    block.appendChild(selRow);
-    container.appendChild(block);
-  }
-}
-
-// ===== LoRA管理UI自動生成 =====
-function buildLoraUI() {
-  const loraListEl = document.getElementById('lora-list');
-  loraListEl.innerHTML = '';
-  loraList.forEach((item, idx) => {
-    const li = document.createElement('li');
-    if (item.nsfw) li.innerHTML += `<span class="lora-nsfw">NSFW</span>`;
-    else li.innerHTML += `<span class="lora-safe">Safe</span>`;
-    li.innerHTML += `<span class="lora-name">${item.display}</span> 
-      <span class="lora-size">${item.size}</span>
-      <span class="lora-desc">${item.desc}</span>
-      <button class="lora-add-btn" data-idx="${idx}">追加</button>`;
-    loraListEl.appendChild(li);
-  });
-
-  // LoRA検索・フィルタ
-  document.getElementById('lora-search').oninput = function() {
-    filterLoraList(this.value);
-  };
-  document.querySelectorAll('.lora-tags button').forEach(btn => {
-    btn.onclick = function() {
-      document.querySelectorAll('.lora-tags button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filterLoraList(document.getElementById('lora-search').value, btn.dataset.tag);
-    };
-  });
-
-  // LoRA追加ボタン
-  document.querySelectorAll('.lora-add-btn').forEach(btn => {
-    btn.onclick = function() {
-      btn.classList.toggle('selected');
-      updatePrompt();
-    };
-  });
-}
-function filterLoraList(search = "", tag = "all") {
-  const loraListEl = document.getElementById('lora-list');
-  loraListEl.innerHTML = '';
-  loraList.forEach((item, idx) => {
-    if (tag && tag !== 'all' && !item.tag.includes(tag)) return;
-    if (search && !item.display.toLowerCase().includes(search.toLowerCase())) return;
-    const li = document.createElement('li');
-    if (item.nsfw) li.innerHTML += `<span class="lora-nsfw">NSFW</span>`;
-    else li.innerHTML += `<span class="lora-safe">Safe</span>`;
-    li.innerHTML += `<span class="lora-name">${item.display}</span> 
-      <span class="lora-size">${item.size}</span>
-      <span class="lora-desc">${item.desc}</span>
-      <button class="lora-add-btn" data-idx="${idx}">追加</button>`;
-    loraListEl.appendChild(li);
-  });
-  document.querySelectorAll('.lora-add-btn').forEach(btn => {
-    btn.onclick = function() {
-      btn.classList.toggle('selected');
-      updatePrompt();
-    };
+    card.appendChild(header);
+    card.appendChild(panel);
+    area.appendChild(card);
   });
 }
 
-// ===== prompt生成 =====
 function updatePrompt() {
-  const langEn = document.getElementById('lang-toggle')?.checked;
-  let promptArr = [...FIXED_PROMPT];
-  let negArr = [...FIXED_NEG_PROMPT];
-
-  // カテゴリー
-  document.querySelectorAll('.category-block').forEach(block => {
-    block.querySelectorAll('.toggle-btn.selected').forEach(btn => promptArr.push(btn.textContent));
-    const select = block.querySelector('select');
-    if (select && select.value) promptArr.push(select.value);
+  let prompt = [FIXED_PROMPT];
+  categoryMeta.forEach(cat => {
+    if (cat.selectType === "single") {
+      const sel = document.querySelector(`select[name="${cat.name}"]`);
+      if (sel && sel.value) {
+        prompt.push(sel.value); // 必ず「value（英語）」のみ
+      }
+    } else {
+      const checked = Array.from(document.querySelectorAll(`input[name="${cat.name}"]:checked`));
+      checked.forEach(el => {
+        prompt.push(el.value); // 必ず「value（英語）」のみ
+      });
+    }
   });
-
-  // LoRA
-  let loraPrompts = [];
-  document.querySelectorAll('.lora-add-btn.selected').forEach(btn => {
-    const idx = btn.getAttribute('data-idx');
-    const lora = loraList[idx];
-    loraPrompts.push(`<lora:${lora.name}:${lora.default_weight}>`);
-    // NSFW選択時のみ、neg promptへ追加
-    if (lora.nsfw) negArr.push("censored", "blurry", "mosaic", "overexposed");
-  });
-
-  // Positive
-  let out = promptArr.join(', ');
-  if (loraPrompts.length) out = loraPrompts.join(' ') + " " + out;
-  // （日本語→英語変換ロジック必要ならここで変換）
-
-  document.getElementById('prompt-output').value = out;
-
-  // Negative
-  let neg = [...new Set(negArr)].join(', ');
-  document.getElementById('neg-output').value = neg;
+  document.getElementById('prompt-output').value = prompt.join(', ');
 }
 
-// ===== コピーボタン等 =====
-function addEventListeners() {
-  document.getElementById('copy-btn').onclick = () => {
-    let val = "Positive prompt:\n" + document.getElementById('prompt-output').value + "\n\n";
-    val += "Negative prompt:\n" + document.getElementById('neg-output').value;
-    navigator.clipboard.writeText(val);
-    document.getElementById('copy-btn').textContent = "コピー完了";
-    setTimeout(() => document.getElementById('copy-btn').textContent = "コピペ", 1300);
-  };
-  document.getElementById('reset-btn').onclick = () => {
-    document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('selected'));
-    document.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
-    document.querySelectorAll('.lora-add-btn').forEach(btn => btn.classList.remove('selected'));
-    updatePrompt();
-  };
-  document.getElementById('lang-toggle').onchange = updatePrompt;
-}
+document.getElementById('copy-prompt').onclick = function() {
+  const ta = document.getElementById('prompt-output');
+  ta.select();
+  document.execCommand('copy');
+};
+document.getElementById('copy-negprompt').onclick = function() {
+  const ta = document.getElementById('negprompt-output');
+  ta.select();
+  document.execCommand('copy');
+};
